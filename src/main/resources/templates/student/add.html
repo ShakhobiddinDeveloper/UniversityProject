@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student create</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main_style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/admin/student.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/file_upload.css}"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../../static/css/admin/student.css">
+    <link rel="stylesheet" href="../../../static/css/file_upload.css">
+
+</head>
+<body>
+
+
+<div class="container">
+    <h1>University Management System</h1>
+    <hr>
+    <!-- Page -->
+    <h1 class="h3 mb-2 text-gray-800">Student Added</h1>
+    <form method="post"
+          th:action="${isUpdate} ? @{/student/update/{id}(id=${student.id})} : @{/student/add}"
+          th:object="${student}"
+          enctype="multipart/form-data" autocomplete="off">
+
+        <br>
+        <div class="flex-grow-1">
+            <label for="file-upload-input-id">Фото</label>
+            <div class="form-image-block">
+                <img src="" th:src="${student.photoUrl != null ? student.photoUrl : ''}"
+                     id="file-upload-img-id" alt="">
+            </div>
+            <div class="file-input-wrapper">
+                <input type="file" id="file-upload-input-id" name="file" accept="image/*" hidden/>
+                <label for="file-upload-input-id">Choose file</label>
+            </div>
+        </div>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" class="form-control mb-4 col-4" name="id" placeholder="id"
+               th:field="*{studentId}" required>
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="form-control mb-4 col-4 mb-4 col-4" name="name" placeholder="name"
+               th:field="*{name}" required>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" class="form-control mb-4 col-4" name="surname"
+               placeholder="surname"
+               th:field="*{surname}" required>
+        <label for="middleName">Middle name:</label>
+        <input type="text" id="middleName" class="form-control mb-4 col-4" name="middleName"
+               placeholder="middleName"
+               th:field="*{middleName}" required>
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" th:field="*{gender}">
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option>
+        </select>
+        <label for="birthDate">BirthDate:</label>
+        <input type="date" id="birthDate" class="form-control mb-4 col-4" name="birthDate"
+               placeholder="birthDate"
+               th:field="*{birthDate}" required>
+        <label for="studyStartDate">study Start Date:</label>
+        <input type="date" id="studyStartDate" class="form-control mb-4 col-4" name="studyStartDate"
+               placeholder="studyStartDate"
+               th:field="*{studyStartDate}" required>
+        <label for="studyEndDate">Study End Date:</label>
+        <input type="date" id="studyEndDate" class="form-control mb-4 col-4" name="studyEndDate"
+               placeholder="studyEndDate"
+               th:field="*{studyEndDate}" required>
+        <!--        <label for="fieldOfStudy">Field Of Study:</label>-->
+        <!--        <input type="text" id="fieldOfStudy" class="form-control mb-4 col-4" name="fieldOfStudy"-->
+        <!--               placeholder="fieldOfStudy"-->
+        <!--               th:field="*{fieldOfStudyId}" required>-->
+        <label for="description">Description:</label>
+        <input type="text" id="description" class="form-control mb-4 col-4" name="description"
+               placeholder="description"
+               th:field="*{description}" required>
+
+        <div class=" pb-2">
+            <label for="name">fieldOfStudy:</label>
+            <select id="fieldOfStudy" name="fieldOfStudy" th:field="*{fieldOfStudyId}" required
+                    class="custom-select">
+                <option selected disabled value="0">...</option>
+                <option th:each="university:${universityList}" th:value="${university.id}"
+                        th:text="${university.name}"></option>
+            </select>
+        </div>
+
+        <div class=" ">
+            <div class="col-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"
+                            th:text="${isUpdate ? 'Update': 'Save'}">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/file_upload.js}"></script>
+<script src="../../../static/js/file_upload.js"></script>
+
+</body>
+</html>

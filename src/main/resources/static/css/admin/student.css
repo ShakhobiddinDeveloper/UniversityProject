@@ -1,0 +1,14 @@
+.profile-table-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    align-content: center;
+}
+
+.profile-image-wrapper {
+    width: 10%;
+}
+
+.profile-image-wrapper img {
+    width: 25%;
+}
